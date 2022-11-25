@@ -8,7 +8,6 @@ import { IconDetail } from '../../component';
 export default function DetailCard({ route }) {
   const { width, height } = Dimensions.get('screen');
   const navigation = useNavigation();
-
   return (
     <SafeAreaView>
       <ScrollView>

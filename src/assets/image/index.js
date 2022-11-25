@@ -1,3 +1,5 @@
 import logo from './logo.png';
+import homeScreen from './homeScreen.jpg';
 
-export { logo };
+const images = { logo, homeScreen };
+export default images;

@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 const getLatLong = async (search) => {
-  console.log('🚀 ~ file: getApi.js ~ line 4 ~ getLatLong ~ search', `${search} Indonesia`);
   const options = {
     method: 'GET',
     url: 'https://travel-advisor.p.rapidapi.com/locations/auto-complete',
@@ -25,7 +24,6 @@ const getLatLong = async (search) => {
 
 const getHotel = async ({ latitude, longitude }) => {
   try {
-    console.log({ latitude: latitude });
     const res = await axios.get('https://travel-advisor.p.rapidapi.com/hotels/list-by-latlng', {
       params: { latitude: latitude ? latitude : '-8.36977497199996', longitude: longitude ? longitude : '115.13165412300009', limit: '10' },
       headers: {
@@ -33,7 +31,6 @@ const getHotel = async ({ latitude, longitude }) => {
         'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com',
       },
     });
-    // console.log({ getHotel: res.data.data });
     return res.data.data;
   } catch (err) {
     console.log(err);
