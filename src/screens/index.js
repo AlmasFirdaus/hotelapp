@@ -1,4 +1,5 @@
-import DetailCard from './detailcard/DetailCard';
 import HomeScreen from './homescreen/HomeScreen';
+import DetailCard from './detailcardscreen/DetailCard';
+import BookingScreen from './bookingscreen/BookingScreen';
 
-export default { HomeScreen, DetailCard };
+export { HomeScreen, DetailCard, BookingScreen };
