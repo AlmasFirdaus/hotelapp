@@ -27,19 +27,18 @@ export default function HomeScreen() {
   };
 
   useEffect(() => {
-    setIsloding(true);
-
-    if (dataHotel.length === 0) {
-      getLatLong(search).then((res) => {
-        getHotel({ latitude: res.data[0].result_object.latitude, longitude: res.data[0].result_object.longitude }).then((resHotel) => {
-          setDataHotel(resHotel);
-        });
-      });
-    } else {
-      setTimeout(() => {
-        setIsloding((prev) => !prev);
-      }, 2000);
-    }
+    // setIsloding(true);
+    // if (dataHotel.length === 0) {
+    //   getLatLong(search).then((res) => {
+    //     getHotel({ latitude: res.data[0].result_object.latitude, longitude: res.data[0].result_object.longitude }).then((resHotel) => {
+    //       setDataHotel(resHotel);
+    //     });
+    //   });
+    // } else {
+    //   setTimeout(() => {
+    //     setIsloding((prev) => !prev);
+    //   }, 2000);
+    // }
   }, [dataHotel]);
   return (
     <SafeAreaView>
@@ -56,9 +55,9 @@ export default function HomeScreen() {
         </ImageBackground>
       </View>
 
-      <View style={{ paddingHorizontal: 15, paddingVertical: 50, backgroundColor: '#fff', borderTopLeftRadius: 40, borderTopRightRadius: 40, overflow: 'hidden' }}>
+      <View style={{ paddingHorizontal: 15, paddingVertical: 25, backgroundColor: '#fff', borderTopLeftRadius: 40, borderTopRightRadius: 40, overflow: 'hidden' }}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={{ minHeight: 500 }}>
+          <View style={{ minHeight: 500, paddingBottom: 360 }}>
             <Text style={{ fontWeight: 'bold', fontSize: 28, letterSpacing: 2 }}>Hotel</Text>
             {isLoading && (
               <View style={{ minHeight: height, flex: 1, justifyContent: 'center', alignItems: 'center' }}>
