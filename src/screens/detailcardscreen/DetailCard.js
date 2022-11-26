@@ -10,19 +10,19 @@ export default function DetailCard({ route }) {
   const navigation = useNavigation();
   return (
     <SafeAreaView>
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        style={{ zIndex: 12, width: 36, height: 36, backgroundColor: '#F1F5FE', borderRadius: 18, justifyContent: 'center', alignItems: 'center', position: 'absolute', top: 20, left: 20 }}
+      >
+        <Icon name="chevron-back" size={24} color="rgba(0,0,0,0.6)" />
+      </TouchableOpacity>
       <ScrollView>
         <View style={{ flex: 1, flexWrap: 'wrap' }}>
           <Image source={{ uri: route.params.data.photo.images.original.url }} style={{ width: width, height: width, resizeMode: 'cover' }} />
         </View>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={{ zIndex: 12, width: 36, height: 36, backgroundColor: '#F1F5FE', borderRadius: 18, justifyContent: 'center', alignItems: 'center', position: 'absolute', top: 20, left: 20 }}
-        >
-          <Icon name="chevron-back" size={24} color="rgba(0,0,0,0.6)" />
-        </TouchableOpacity>
         <View>
-          <View style={{ flex: 1, borderTopLeftRadius: 28, borderTopRightRadius: 28, marginTop: -50, minHeight: height / 2 }}>
-            <View style={{ flex: 1, justifyContent: 'space-between', backgroundColor: '#fff', paddingVertical: 40, paddingHorizontal: 16, borderTopLeftRadius: 28, borderTopRightRadius: 28 }}>
+          <View style={{ flex: 1, borderTopLeftRadius: 28, borderTopRightRadius: 28, marginTop: -50, minHeight: 350 }}>
+            <View style={{ flex: 1, justifyContent: 'flex-start', backgroundColor: '#fff', paddingTop: 45, paddingBottom: 50, paddingHorizontal: 16, borderTopLeftRadius: 40, borderTopRightRadius: 40 }}>
               <View>
                 <Text style={{ fontWeight: 'bold', fontSize: 28, letterSpacing: 1, marginBottom: 12 }}>{route.params.data.name}</Text>
                 <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'center' }}>
@@ -32,7 +32,7 @@ export default function DetailCard({ route }) {
                 </View>
               </View>
 
-              <View style={{ marginVertical: 18 }}>
+              <View style={{ marginTop: 30, marginBottom: 50 }}>
                 <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 10 }}>Description</Text>
                 <Text style={{ letterSpacing: 1, lineHeight: 22 }}>{route.params.data.ranking}</Text>
               </View>

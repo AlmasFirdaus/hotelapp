@@ -43,7 +43,7 @@ export default function HomeScreen() {
   }, [dataHotel]);
   return (
     <SafeAreaView>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <View style={{ height: 180 }}>
         <ImageBackground source={images.homeScreen} resizeMode="cover" style={{ flex: 1, height: 300, paddingTop: 15, paddingHorizontal: 15 }}>
           <NavigationTop nameIcon="home" title="Home" colorTitle="#F1F5FE" />
 
@@ -54,9 +54,11 @@ export default function HomeScreen() {
             </TouchableOpacity>
           </View>
         </ImageBackground>
+      </View>
 
-        <View style={{ flex: 1, padding: 15, marginTop: -70, backgroundColor: '#fff', borderTopLeftRadius: 40, borderTopRightRadius: 40, overflow: 'hidden' }}>
-          <View style={{ marginVertical: 30 }}>
+      <View style={{ paddingHorizontal: 15, paddingVertical: 50, backgroundColor: '#fff', borderTopLeftRadius: 40, borderTopRightRadius: 40, overflow: 'hidden' }}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={{ minHeight: 500 }}>
             <Text style={{ fontWeight: 'bold', fontSize: 28, letterSpacing: 2 }}>Hotel</Text>
             {isLoading && (
               <View style={{ minHeight: height, flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -70,8 +72,8 @@ export default function HomeScreen() {
               </View>
             )}
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }
