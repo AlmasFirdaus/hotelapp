@@ -25,7 +25,7 @@ const getLatLong = async (search) => {
 const getHotel = async ({ latitude, longitude }) => {
   try {
     const res = await axios.get('https://travel-advisor.p.rapidapi.com/hotels/list-by-latlng', {
-      params: { latitude: latitude ? latitude : '-8.36977497199996', longitude: longitude ? longitude : '115.13165412300009', limit: '10' },
+      params: { latitude: latitude ? latitude : '-8.36977497199996', longitude: longitude ? longitude : '115.13165412300009', limit: '14' },
       headers: {
         'X-RapidAPI-Key': '0598613c52msha7ed4913e26d0d7p1720cajsnaf17581b23e6',
         'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com',

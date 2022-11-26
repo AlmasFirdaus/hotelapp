@@ -1,11 +1,10 @@
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Dimensions, Image, ImageBackground } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { styles } from '../../assets/style/style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Card, NavigationTop } from '../../component';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { getHotel, getLatLong } from '../../api/getApi';
-import images from '../../assets/image';
+import { getHotel, getLatLong } from '../../../../api/getApi';
+import images from '../../../../assets/image';
 
 export default function HomeScreen() {
   const [dataHotel, setDataHotel] = useState([]);
@@ -14,31 +13,33 @@ export default function HomeScreen() {
   const height = (Dimensions.get('screen').height * 65) / 100;
 
   const handleSearch = () => {
-    setIsloding(true);
+    if (search !== '') {
+      setIsloding(true);
 
-    getLatLong(search).then((res) => {
-      getHotel({ latitude: res.data[0].result_object.latitude, longitude: res.data[0].result_object.longitude }).then((resHotel) => {
-        setDataHotel(resHotel);
-        setTimeout(() => {
-          setIsloding((prev) => !prev);
-        }, 2000);
+      getLatLong(search).then((res) => {
+        getHotel({ latitude: res.data[0].result_object.latitude, longitude: res.data[0].result_object.longitude }).then((resHotel) => {
+          setDataHotel(resHotel);
+          setTimeout(() => {
+            setIsloding((prev) => !prev);
+          }, 2000);
+        });
       });
-    });
+    }
   };
 
   useEffect(() => {
-    // setIsloding(true);
-    // if (dataHotel.length === 0) {
-    //   getLatLong(search).then((res) => {
-    //     getHotel({ latitude: res.data[0].result_object.latitude, longitude: res.data[0].result_object.longitude }).then((resHotel) => {
-    //       setDataHotel(resHotel);
-    //     });
-    //   });
-    // } else {
-    //   setTimeout(() => {
-    //     setIsloding((prev) => !prev);
-    //   }, 2000);
-    // }
+    setIsloding(true);
+    if (dataHotel.length === 0) {
+      getLatLong(search).then((res) => {
+        getHotel({ latitude: res.data[0].result_object.latitude, longitude: res.data[0].result_object.longitude }).then((resHotel) => {
+          setDataHotel(resHotel);
+        });
+      });
+    } else {
+      setTimeout(() => {
+        setIsloding((prev) => !prev);
+      }, 2000);
+    }
   }, [dataHotel]);
   return (
     <SafeAreaView>
@@ -61,7 +62,7 @@ export default function HomeScreen() {
             <Text style={{ fontWeight: 'bold', fontSize: 28, letterSpacing: 2 }}>Hotel</Text>
             {isLoading && (
               <View style={{ minHeight: height, flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Image source={require('../../assets/image/logo.png')} style={{ width: 100, height: 100 }} />
+                <Image source={require('../../../../assets/image/logo.png')} style={{ width: 100, height: 100 }} />
                 <Text>Loading</Text>
               </View>
             )}
