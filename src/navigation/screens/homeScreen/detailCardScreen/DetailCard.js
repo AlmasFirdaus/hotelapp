@@ -3,11 +3,12 @@ import { View, Text, Image, Dimensions, ScrollView, TouchableOpacity } from 'rea
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
-import { IconDetail } from '../../component';
+import { IconDetail } from '../../../../component';
 
 export default function DetailCard({ route }) {
   const { width, height } = Dimensions.get('screen');
   const navigation = useNavigation();
+  let item = route.params.data;
   return (
     <SafeAreaView>
       <TouchableOpacity
@@ -18,23 +19,28 @@ export default function DetailCard({ route }) {
       </TouchableOpacity>
       <ScrollView>
         <View style={{ flex: 1, flexWrap: 'wrap' }}>
-          <Image source={{ uri: route.params.data.photo.images.original.url }} style={{ width: width, height: width, resizeMode: 'cover' }} />
+          <Image source={{ uri: item.images.original.url }} style={{ width: width, height: width, resizeMode: 'cover' }} />
         </View>
         <View>
           <View style={{ flex: 1, borderTopLeftRadius: 28, borderTopRightRadius: 28, marginTop: -50, minHeight: 350 }}>
             <View style={{ flex: 1, justifyContent: 'flex-start', backgroundColor: '#fff', paddingTop: 45, paddingBottom: 50, paddingHorizontal: 16, borderTopLeftRadius: 40, borderTopRightRadius: 40 }}>
-              <View>
-                <Text style={{ fontWeight: 'bold', fontSize: 28, letterSpacing: 1, marginBottom: 12 }}>{route.params.data.name}</Text>
-                <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'center' }}>
-                  <IconDetail nameIcon="star" colorIcon="#FFBD09" titleIcon={route.params.data.rating} review={route.params.data.num_reviews} />
-                  <IconDetail nameIcon="pricetags" colorIcon="#0096D1" titleIcon={route.params.data.price} />
-                  <IconDetail nameIcon="location" colorIcon="red" titleIcon={route.params.data.location_string} />
+              <View style={{ flex: 1, justifyContent: 'space-between' }}>
+                <View style={{ flex: 1 }}>
+                  <Text style={{ fontWeight: 'bold', fontSize: 28, letterSpacing: 1 }}>{item.name}</Text>
+                  <Text>{item.ranking}</Text>
                 </View>
-              </View>
+                <View style={{ marginVertical: 30, flex: 1, flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'center' }}>
+                  <IconDetail nameIcon="star" colorIcon="#FFBD09" titleIcon={item.hotel_class} />
+                  <IconDetail nameIcon="thumbs-up" colorIcon="#FFA8A8" titleIcon={item.rating} review={item.num_reviews} />
 
-              <View style={{ marginTop: 30, marginBottom: 50 }}>
-                <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 10 }}>Description</Text>
-                <Text style={{ letterSpacing: 1, lineHeight: 22 }}>{route.params.data.ranking}</Text>
+                  <IconDetail nameIcon="pricetags" colorIcon="#0096D1" titleIcon={item.price} />
+                  <IconDetail nameIcon="location" colorIcon="red" titleIcon={item.address} />
+                </View>
+
+                <View style={{ flex: 1, marginBottom: 50 }}>
+                  <Text style={{ fontWeight: 'bold', fontSize: 18, marginBottom: 10 }}>Description</Text>
+                  <Text style={{ letterSpacing: 1, lineHeight: 22 }}>{item.description}</Text>
+                </View>
               </View>
 
               <View>

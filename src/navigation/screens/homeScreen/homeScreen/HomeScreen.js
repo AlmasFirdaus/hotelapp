@@ -1,13 +1,13 @@
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Dimensions, Image, ImageBackground } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { Card, NavigationTop } from '../../component';
+import { Card, NavigationTop } from '../../../../component';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { getHotel, getLatLong } from '../../../../api/getApi';
+import { getHotel, getLocation } from '../../../../api/getApi';
 import images from '../../../../assets/image';
 
 export default function HomeScreen() {
-  const [dataHotel, setDataHotel] = useState([]);
+  const [dataHotel, setDataHotel] = useState();
   const [isLoading, setIsloding] = useState(false);
   const [search, setSearch] = useState('');
   const height = (Dimensions.get('screen').height * 65) / 100;
@@ -16,7 +16,7 @@ export default function HomeScreen() {
     if (search !== '') {
       setIsloding(true);
 
-      getLatLong(search).then((res) => {
+      getLocation(search).then((res) => {
         getHotel({ latitude: res.data[0].result_object.latitude, longitude: res.data[0].result_object.longitude }).then((resHotel) => {
           setDataHotel(resHotel);
           setTimeout(() => {
@@ -29,17 +29,17 @@ export default function HomeScreen() {
 
   useEffect(() => {
     setIsloding(true);
-    if (dataHotel.length === 0) {
-      getLatLong(search).then((res) => {
-        getHotel({ latitude: res.data[0].result_object.latitude, longitude: res.data[0].result_object.longitude }).then((resHotel) => {
-          setDataHotel(resHotel);
-        });
-      });
-    } else {
-      setTimeout(() => {
-        setIsloding((prev) => !prev);
-      }, 2000);
-    }
+    // if (!dataHotel) {
+    //   getLocation(search).then((res) => {
+    //     getHotel({ locationId: res.locationId }).then((resHotel) => {
+    //       setDataHotel(resHotel);
+    //     });
+    //   });
+    // } else {
+    //   setTimeout(() => {
+    //     setIsloding((prev) => !prev);
+    //   }, 2000);
+    // }
   }, [dataHotel]);
   return (
     <SafeAreaView>
@@ -67,9 +67,7 @@ export default function HomeScreen() {
               </View>
             )}
             {!isLoading && (
-              <View style={{ marginVertical: 15, flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'space-between' }}>
-                {dataHotel.length > 0 ? dataHotel?.map((data, index) => (data.name ? <Card item={data} key={index} /> : null)) : null}
-              </View>
+              <View style={{ marginVertical: 15, flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'space-between' }}>{dataHotel && dataHotel?.map((data, index) => (data.name ? <Card item={data} key={index} /> : null))}</View>
             )}
           </View>
         </ScrollView>

@@ -10,7 +10,7 @@ export default function NavigationTop({ nameIcon, title, colorTitle }) {
       <TouchableOpacity onPress={() => (title !== 'Home' ? navigation.goBack() : null)} style={{ backgroundColor: '#F1F5FE', padding: 8, borderRadius: 50 }}>
         <Icon name={`${nameIcon}`} size={24} />
       </TouchableOpacity>
-      <Text style={{ fontSize: 16, fontWeight: 'bold', marginLeft: 10, color: colorTitle ? colorTitle : 'black' }}>{title}</Text>
+      <Text style={{ fontSize: 18, letterSpacing: 1, fontWeight: 'bold', marginLeft: 10, color: colorTitle ? colorTitle : 'black' }}>{title}</Text>
     </View>
   );
 }
